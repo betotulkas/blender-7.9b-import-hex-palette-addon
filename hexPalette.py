@@ -28,7 +28,6 @@ def initSceneProperties():
         name = "String")
 
  #string%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 	return
  
 # initSceneProperties(bpy.context.scene)
@@ -48,7 +47,7 @@ class UIPanel(bpy.types.Panel):
 		layout = self.layout
 		scn = context.scene
 		layout.prop(scn, "MyString")		
-		layout.operator("create_empty_palette.create_hex_palette_")
+		# layout.operator("create_empty_palette.create_hex_palette_")
 		layout.operator("pluss_palette.pluss_palette_to_exist")      #idname_must.be_all_lowercase_and_contain_one_dot
 		layout.operator("path_file.txt")
 
@@ -61,6 +60,7 @@ class OBJECT_OT_FromPathfilet(bpy.types.Operator):
 
 
 	def execute(self, context):
+		
 		display = self.filepath  
 		display = str(display)
 		display = display.replace("\\" , "/")
@@ -84,17 +84,13 @@ class OBJECT_OT_FromPathfilet(bpy.types.Operator):
 		return {'RUNNING_MODAL'}  
 		# Tells Blender to hang on for the slow user input
 
-class OBJECT_OT_CreateEmptyPalette(bpy.types.Operator):
-	bl_idname = "create_empty_palette.create_hex_palette_"
-	bl_label = "create empty hex palette "
-	def execute(self, context):
-		if not bpy.data.palettes:
-			bpy.ops.palette.new()
-			bpy.data.palettes[0].name="Hex palette"
-		elif bpy.data.palettes[0].name!="Hex palette":
-			bpy.data.palettes[0].name="Hex palette"
+# class OBJECT_OT_CreateEmptyPalette(bpy.types.Operator):
+	# bl_idname = "create_empty_palette.create_hex_palette_"
+	# bl_label = "create empty hex palette "
+	# def execute(self, context):
+		# addNamePalette()
 
-		return{'FINISHED'} 
+		# return{'FINISHED'} 
 
 class OBJECT_OT_PlussPal(bpy.types.Operator):
 	
@@ -110,6 +106,12 @@ class OBJECT_OT_PlussPal(bpy.types.Operator):
 
 		return{'FINISHED'} 
 		
+def addNamePalette():
+	if not bpy.data.palettes:
+		bpy.ops.palette.new()
+		# bpy.data.palettes[0].name="Hex palette"
+	if bpy.data.palettes[len(bpy.data.palettes)-1].name!="Hex palette":
+		bpy.data.palettes[len(bpy.data.palettes)-1].name="Hex palette"
 		
 
 class OBJECT_OT_Scn(bpy.types.Operator):
@@ -130,8 +132,10 @@ class OBJECT_OT_Scn(bpy.types.Operator):
 		
 		
 def arrStrToPalette(myStr):
+	addNamePalette()
 
-	tempVarLenColor=len(bpy.data.palettes[0].colors)
+	print(len(bpy.data.palettes)-1)
+	tempVarLenColor=len(bpy.data.palettes[len(bpy.data.palettes)-1].colors)
 	tempArr=[]
 	tempArra2=[]
 	# print(tempVarLenColor)
@@ -154,7 +158,7 @@ def arrStrToPalette(myStr):
 				x[i]=rgbTr(x[i])
 				
 			
-			bpy.data.palettes[0].colors[tempVarLenColor+num_].color=x
+			bpy.data.palettes[len(bpy.data.palettes)-1].colors[tempVarLenColor+num_].color=x
 			tempArra2.append(x)
 			
 			num_=num_+1		
