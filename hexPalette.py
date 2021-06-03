@@ -6,7 +6,7 @@ import numpy as np
 bl_info = {
     "name": "hexPalette",
     "author": "luis alberto rodriguez montilla",
-    "version": (0),
+    "version": (0,02),
     "blender": (2, 72, 2),
     "location": "UV/Image Editor(IMAGE_EDITOR) > TOOLS > Tools",
     "warning": "",
@@ -23,11 +23,9 @@ bl_info = {
 
 def initSceneProperties():
 	
- #string%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	bpy.types.Scene.MyString = StringProperty(
         name = "String")
 
- #string%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	return
  
 # initSceneProperties(bpy.context.scene)
@@ -84,13 +82,6 @@ class OBJECT_OT_FromPathfilet(bpy.types.Operator):
 		return {'RUNNING_MODAL'}  
 		# Tells Blender to hang on for the slow user input
 
-# class OBJECT_OT_CreateEmptyPalette(bpy.types.Operator):
-	# bl_idname = "create_empty_palette.create_hex_palette_"
-	# bl_label = "create empty hex palette "
-	# def execute(self, context):
-		# addNamePalette()
-
-		# return{'FINISHED'} 
 
 class OBJECT_OT_PlussPal(bpy.types.Operator):
 	
