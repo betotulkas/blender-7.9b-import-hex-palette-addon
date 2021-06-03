@@ -41,7 +41,7 @@ class UIPanel(bpy.types.Panel):
 	# bl_region_type = "UI"
 	bl_region_type = "TOOLS"
 	bl_category = "Tools"
-	# bl_context  = "Paint"
+	bl_context  = "Paint"
 
 	def draw(self, context):
 		layout = self.layout
@@ -111,6 +111,7 @@ def addNamePalette():
 		bpy.ops.palette.new()
 		# bpy.data.palettes[0].name="Hex palette"
 	if bpy.data.palettes[len(bpy.data.palettes)-1].name!="Hex palette":
+		bpy.ops.palette.new()
 		bpy.data.palettes[len(bpy.data.palettes)-1].name="Hex palette"
 		
 
